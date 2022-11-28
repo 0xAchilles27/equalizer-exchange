@@ -29,10 +29,10 @@ The following environment variables should be defined in a .env file:
 ### Key Functions
 
  ```shell
-deposit(assets, receiver)- user deposit underlying asset and mints vault shares
-mint(shares, receiver)- user deposit underlying asset and mints vault shares
-withdraw(assets, receiver, owner)- user burns share and receives assets in return
-redeem(shares, receiver, owner)- user burns share and receives assets in return
+deposit(assets, receiver)- user specifies amount of underlying assets to deposit and mints vault shares
+mint(shares, receiver)- user deposits underlying assets and specifies amount of vault shares to mint
+withdraw(assets, receiver, owner)- user specifies amount of underlying asset to withdraw and burns vault shares
+redeem(shares, receiver, owner)- user withdraws underlying asset and specifies amount of vault shares to burn
 ```
  
  View functions that preview outcomes
