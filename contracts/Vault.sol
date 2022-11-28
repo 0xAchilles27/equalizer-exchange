@@ -8,26 +8,8 @@ import "@openzeppelin/contracts/interfaces/IERC4626.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
 
 /**
- * @dev Implementation of the ERC4626 "Tokenized Vault Standard" as defined in
- *
- * Key Functions
- *      deposit(assets, receiver)- user deposit underlying asset and mints vault shares
- *      mint(shares, receiver)- user deposit underlying asset and mints vault shares
- *      withdraw(assets, receiver, owner)- user burns share and receives assets in return
- *      redeem(shares, receiver, owner)- user burns share and receives assets in return
- * 
- * View functions that preview outcomes
- *      previewDeposit(assets)- call convertToShares(assets)
- *      previewMint(shares)- call convertToAssets(shares)
- *      previewWithdraw(assets)- call convertToAssets(shares)
- *      previewRedeem(shares)- call convertToShares(assets)
- * 
- * View functions that show caps
- *      maxDeposit(receiver)- returns type(uint256).max unless vault share is minted when underyling asset is 0 
- *      maxMint(receiver)- return type(uint256).max;
- *      maxWithdraw(owner)- returns convertToAssets(balanceOf(owner)
- *      maxRedeem(owner)- return balanceOf(owner)
- */
+ * @dev Implementation of the ERC4626 "Tokenized Vault Standard" as defined in ERC4626
+**/
 
 contract Vault is ERC20, IERC4626 {
     using Math for uint256;

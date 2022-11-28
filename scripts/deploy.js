@@ -39,10 +39,10 @@ async function main() {
   console.log("Vault deployed to : ", vault.address)
   console.log("-----------------------------------")
 
-  // await verifyAssetAndShares(vault, token)
-  // await mintAssetsToAccounts(token, signer1, signer2)
-  // await depositAssetsIntoVault(vault, token, signer1)
-  // await mintSharesFromVault(vault, token, signer2)
+  await verifyAssetAndShares(vault, token)
+  await mintAssetsToAccounts(token, signer1, signer2)
+  await depositAssetsIntoVault(vault, token, signer1)
+  await mintSharesFromVault(vault, token, signer2)
   await withdrawAssetsFromVault(vault, token, signer1)
   await redeemSharesFromVault(vault, token, signer2)
 }
@@ -66,11 +66,11 @@ async function verifyAssetAndShares (vault, token) {
 }
 
 async function mintAssetsToAccounts(token, signer1, signer2) {
-  // const transferAmount = ethers.utils.parseEther("10");
-  // const transfer1 = await token.transfer(signer1.address, transferAmount);
-  // const transfer2 = await token.transfer(signer2.address, transferAmount);
-  // console.log("Transfer txn hash: ", transfer1.hash)
-  // console.log("Transfer txn hash: ", transfer2.hash)
+  const transferAmount = ethers.utils.parseEther("10");
+  const transfer1 = await token.transfer(signer1.address, transferAmount);
+  const transfer2 = await token.transfer(signer2.address, transferAmount);
+  console.log("Transfer txn hash: ", transfer1.hash)
+  console.log("Transfer txn hash: ", transfer2.hash)
 
   const signer1Balance = await token.balanceOf(signer1.address);
   const signer2Balance = await token.balanceOf(signer2.address);
@@ -85,10 +85,10 @@ async function depositAssetsIntoVault(vault, token, signer1) {
   console.log(`Account ${signer1.address} calling deposit() function`);
   
   // Approve vault contract to transfer underlying token from signer
-  // const approveTransaction = await token.connect(signer1).approve(vault.address, ethers.utils.parseEther("10"));
-  // console.log("Approve txn hash: ", approveTransaction.hash)
-  // const depositTransaction = await vault.connect(signer1).deposit(ethers.utils.parseEther("10"), signer1.address)
-  // console.log("Deposit txn hash: ", depositTransaction.hash)
+  const approveTransaction = await token.connect(signer1).approve(vault.address, ethers.utils.parseEther("10"));
+  console.log("Approve txn hash: ", approveTransaction.hash)
+  const depositTransaction = await vault.connect(signer1).deposit(ethers.utils.parseEther("10"), signer1.address)
+  console.log("Deposit txn hash: ", depositTransaction.hash)
 
   const signer1Balance = await token.balanceOf(signer1.address);
   const signer1Share = await vault.balanceOf(signer1.address)
@@ -106,10 +106,10 @@ async function mintSharesFromVault(vault, token, signer2) {
   console.log(`Account ${signer2.address} calling mint() function`);
 
   // Approve vault contract to transfer underlying token from signer
-  // const approveTransaction = await token.connect(signer2).approve(vault.address, ethers.utils.parseEther("5"));
-  // console.log("Approve txn hash: ", approveTransaction.hash)
-  // const mintTransaction = await vault.connect(signer2).mint(ethers.utils.parseEther("5"), signer2.address)
-  // console.log("Mint txn hash: ", mintTransaction.hash)
+  const approveTransaction = await token.connect(signer2).approve(vault.address, ethers.utils.parseEther("5"));
+  console.log("Approve txn hash: ", approveTransaction.hash)
+  const mintTransaction = await vault.connect(signer2).mint(ethers.utils.parseEther("5"), signer2.address)
+  console.log("Mint txn hash: ", mintTransaction.hash)
 
   const signer2Balance = await token.balanceOf(signer2.address);
   const signer2Share = await vault.balanceOf(signer2.address)
@@ -125,8 +125,8 @@ async function mintSharesFromVault(vault, token, signer2) {
 
 async function withdrawAssetsFromVault(vault, token, signer1) {
   console.log(`Account ${signer1.address} calling withdraw() function`);
-  // const withdrawTransaction = await vault.connect(signer1).withdraw(ethers.utils.parseEther("10"), signer1.address, signer1.address)
-  // console.log("Withdraw txn hash: ", withdrawTransaction.hash)
+  const withdrawTransaction = await vault.connect(signer1).withdraw(ethers.utils.parseEther("10"), signer1.address, signer1.address)
+  console.log("Withdraw txn hash: ", withdrawTransaction.hash)
 
   const signer1Balance = await token.balanceOf(signer1.address);
   const signer1Share = await vault.balanceOf(signer1.address)
@@ -142,8 +142,8 @@ async function withdrawAssetsFromVault(vault, token, signer1) {
 
 async function redeemSharesFromVault(vault, token, signer2) {
   console.log(`Account ${signer2.address} calling redeem() function`);
-  // const redeemTransaction = await vault.connect(signer2).redeem(ethers.utils.parseEther("5"), signer2.address, signer2.address)
-  // console.log("Redeem txn hash: ", redeemTransaction.hash)
+  const redeemTransaction = await vault.connect(signer2).redeem(ethers.utils.parseEther("5"), signer2.address, signer2.address)
+  console.log("Redeem txn hash: ", redeemTransaction.hash)
 
   const signer2Balance = await token.balanceOf(signer2.address);
   const signer2Share = await vault.balanceOf(signer2.address)
